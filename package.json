@@ -1,8 +1,9 @@
 {
-  "name": "fas-id",
+  "name": "fas-server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node index.js"
   },
@@ -10,6 +11,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2",
     "xhr2": "^0.2.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.17"
   }
 }
