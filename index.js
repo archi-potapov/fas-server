@@ -1,6 +1,7 @@
 const http = require("http");
 const qs = require('querystring');
 // const XMLHttpRequest = require('xhr2');
+console.log("SER");
 const server = http.createServer((request, resolve) => {
 
     request.on('data', (data) => {
