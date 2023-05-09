@@ -16,6 +16,6 @@ const server = http.createServer((request, resolve) => {
     resolve.end(newData);
 });
 
-server.listen(3000, 'localhost', (error) => {
-    error ? console.log(error) : console.log('listening port 3000...');
+server.listen(3001, 'localhost', (error) => {
+    error ? console.log(error) : console.log('listening port 3001...');
 })
