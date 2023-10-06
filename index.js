@@ -22,7 +22,8 @@ app.post("/", (request, resolve) => {
   request.on("end", () => {
     console.log(JSON.parse(body));
   });
-  resolve.send({ login: "logggin", error: "" });
+  //   resolve.send({ login: "logggin", error: "" });
+  resolve.send(body);
 });
 
 app.listen(PORT, () => {
