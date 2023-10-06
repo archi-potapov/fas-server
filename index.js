@@ -24,17 +24,18 @@ app.get("/server/", (request, resolve) => {
   console.log(request.hostname);
   resolve.send("Success");
 });
-app.post("/server/", (request, resolve) => {
-  let body = "AA";
+app.post("/", (request, resolve) => {
+  let body = "";
   // let json = request.json();
+  console.log(request.body);
   request.on("data", (chunk) => {
     body += chunk.toString();
+    console.log(body);
   });
   request.on("end", () => {
-    // body = JSON.parse(body);
+    console.log(JSON.parse(body));
   });
-  //   resolve.send({ login: "logggin", error: "" });
-  resolve.send(body);
+  resolve.send({ login: "logggin", error: "" });
 });
 
 app.listen(PORT, () => {
