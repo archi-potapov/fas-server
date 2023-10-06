@@ -25,7 +25,7 @@ app.get("/server/", (request, resolve) => {
   resolve.send("Success");
 });
 app.post("/", (request, resolve) => {
-  let body = "";
+  let body = "AA";
   // let json = request.json();
   request.on("data", (chunk) => {
     body += chunk.toString();
@@ -33,7 +33,7 @@ app.post("/", (request, resolve) => {
   request.on("end", () => {
     console.log(JSON.parse(body));
   });
-//   resolve.send({ login: "logggin", error: "" });
+  //   resolve.send({ login: "logggin", error: "" });
   resolve.send(body);
 });
 
