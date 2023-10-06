@@ -27,15 +27,14 @@ app.get("/server/", (request, resolve) => {
 app.post("/", (request, resolve) => {
   let body = "";
   // let json = request.json();
-  console.log(request.body);
   request.on("data", (chunk) => {
     body += chunk.toString();
-    console.log(body);
   });
   request.on("end", () => {
     console.log(JSON.parse(body));
   });
-  resolve.send({ login: "logggin", error: "" });
+//   resolve.send({ login: "logggin", error: "" });
+  resolve.send(body);
 });
 
 app.listen(PORT, () => {
