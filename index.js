@@ -24,14 +24,14 @@ app.get("/server/", (request, resolve) => {
   console.log(request.hostname);
   resolve.send("Success");
 });
-app.post("/", (request, resolve) => {
+app.post("/server/", (request, resolve) => {
   let body = "AA";
   // let json = request.json();
   request.on("data", (chunk) => {
     body += chunk.toString();
   });
   request.on("end", () => {
-    console.log(JSON.parse(body));
+    // body = JSON.parse(body);
   });
   //   resolve.send({ login: "logggin", error: "" });
   resolve.send(body);
