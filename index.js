@@ -12,18 +12,18 @@ app.get("/", (request, resolve) => {
   resolve.send("Success");
 });
 app.post("/", (request, resolve) => {
-  let body = "";
-  // let json = request.json();
+
   console.log(request.body);
+  
   request.on("data", (chunk) => {
-    body += chunk.toString();
-    console.log(body);
+    console.log("CHUNK");
+    
   });
   request.on("end", () => {
-    console.log(JSON.parse(body));
+    console.log("END");
   });
-  //   resolve.send({ login: "logggin", error: "" });
-  resolve.send(body);
+
+  resolve.send(request.body);
 });
 
 app.listen(PORT, () => {
