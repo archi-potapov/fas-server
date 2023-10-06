@@ -1,31 +1,45 @@
 import express from "express";
 import bodyParser from "body-parser";
+import https from "https";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+
+const __dirname = path.dirname(__filename);
 
 const PORT = 3001;
 const app = express();
 
-app.use(express.urlencoded({extended: false}));
+// const sslServer = https.createServer({
+//     key: fs.readFileSync(path.join(__dirname, 'cert', 'key.pem')),
+//     cert: fs.readFileSync(path.join(__dirname, 'cert', 'cert.pem'))
+// }, app)
+
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.get("/", (req, res) => {
-    console.log("MARAKUYA");
-})
-app.post('/',(req, res) => {
-    let body = '';
-    // let json = req.json();
-    console.log(req.body);
-    req.on('data', chunk => {
-        body += chunk.toString();
-        console.log(body);
-    });
-    req.on('end', () => {
-        console.log(JSON.parse(body));
-    });
-    res.send({"login": "logggin", "error": ""});
-})
+app.get("/", (request, resolve) => {
+  console.log(request.hostname);
+  resolve.send("Success");
+});
+app.post("/", (request, resolve) => {
+  let body = "";
+  // let json = request.json();
+  console.log(request.body);
+  request.on("data", (chunk) => {
+    body += chunk.toString();
+    console.log(body);
+  });
+  request.on("end", () => {
+    console.log(JSON.parse(body));
+  });
+  resolve.send({ login: "logggin", error: "" });
+});
 
 app.listen(PORT, () => {
-    console.log(`The server has been started on port ${PORT}...`);
+  console.log(`The server has been started on port ${PORT}...`);
 });
 
 // const http = require("http");
