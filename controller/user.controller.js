@@ -8,7 +8,10 @@ export class UserController {
       `SELECT EXISTS (SELECT 1 FROM person WHERE login = $1);`,
       [req.body.login]
     );
-    if (isContains) res.json(isContains);
+    if (isContains.rows[0].exists) {
+      res.json(isContains.rows[0].exists);
+      return;
+    }
     const session_key = createHmac("sha256", req.body.login)
       .update(req.body.password + req.body.email)
       .digest("hex");
