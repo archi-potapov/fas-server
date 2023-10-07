@@ -52,12 +52,14 @@ export class UserController {
     else if (user.password !== req.body.password) res.json({ error: "password_invalid" });
     else res.json({ session_key: user.session_key });
   }
-  async getUsers(req, res) {
-    // const users = await db.query(`SELECT * FROM person`)
-    // res.json(users.rows);
-    res.json("Success!!!");
-  }
-  async getOneUser(req, res) {}
-  async updateUser(req, res) {}
-  async deleteUser(req, res) {}
+
+  
+  // async getUsers(req, res) {
+  //   // const users = await db.query(`SELECT * FROM person`)
+  //   // res.json(users.rows);
+  //   res.json("Success!!!");
+  // }
+  // async getOneUser(req, res) {}
+  // async updateUser(req, res) {}
+  // async deleteUser(req, res) {}
 }
