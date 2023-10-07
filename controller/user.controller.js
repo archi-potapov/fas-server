@@ -41,6 +41,7 @@ export class UserController {
     if (!isLoginContains) res.json({ error: "login_notExist" });
     if (!isSessionKeyContains) res.json({ error: "sessionKey_notExist" });
 
+    res.status("OK")
     res.json(true);
   }
   async getUsers(req, res) {
