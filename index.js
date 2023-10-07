@@ -8,10 +8,10 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-// app.get("/", (request, resolve) => {
-//   //   console.log(request.hostname);
-//   resolve.send("Success");
-// });
+app.get("/", (request, resolve) => {
+  //   console.log(request.hostname);
+  resolve.send("Success");
+});
 
 app.use("/", userRouter);
 
