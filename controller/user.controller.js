@@ -1,6 +1,6 @@
 // const db = require("../db");
 import { pool } from "../db.js";
-const secret = "abcdefg";
+const { createHmac } = await import('node:crypto');
 
 export class UserController {
   async createUser(req, res) {
