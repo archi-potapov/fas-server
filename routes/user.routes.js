@@ -5,4 +5,4 @@ export const userRouter = new Router();
 let userController = new UserController();
 
 userRouter.post("", userController.createUser);
-userRouter.get("/is-auth", userController.getUsers);
+userRouter.get("/is-auth", userController.isAuthorized);

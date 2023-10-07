@@ -38,7 +38,7 @@ export class UserController {
     // req.
     // const users = await db.query(`SELECT * FROM person`)
     // res.json(users.rows);
-    res.json("Success!!!");
+    res.json(req.body);
   }
   async getUsers(req, res) {
     // const users = await db.query(`SELECT * FROM person`)
