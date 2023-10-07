@@ -1,6 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
-import { userRouter } from './routes/user.routes';
+import { userRouter } from "./routes/user.routes";
 
 const PORT = 3001;
 const app = express();
@@ -21,7 +21,7 @@ app.use("/", userRouter);
 
 //   request.on("data", (chunk) => {
 //     console.log("CHUNK");
-    
+
 //   });
 //   request.on("end", () => {
 //     console.log("END");
