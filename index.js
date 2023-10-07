@@ -8,7 +8,7 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.get("/server/authorized", (request, resolve) => {
+app.get("/", (request, resolve) => {
   //   console.log(request.hostname);
   resolve.send("Success");
 });
