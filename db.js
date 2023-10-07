@@ -2,10 +2,10 @@ import {Pool} from "pg";
 
 const pool = new Pool({
     user: "postgres",
-    password: "sDBd-w33#-@#$!-V)3F",
+    password: "",
     host: "localhost",
     port: 5432,
-    database: "fas_server_db"
+    database: "users"
 });
 
 module.exports = pool;

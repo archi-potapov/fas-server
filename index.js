@@ -1,5 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
+import { userRouter } from './routes/user.routes';
 
 const PORT = 3001;
 const app = express();
@@ -7,24 +8,27 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.get("/", (request, resolve) => {
-  //   console.log(request.hostname);
-  resolve.send("Success");
-});
-app.post("/", (request, resolve) => {
+// app.get("/", (request, resolve) => {
+//   //   console.log(request.hostname);
+//   resolve.send("Success");
+// });
 
-  console.log(request.body);
-  
-  request.on("data", (chunk) => {
-    console.log("CHUNK");
+app.use("/", userRouter);
+
+// app.post("/", (request, resolve) => {
+
+//   console.log(request.body);
+
+//   request.on("data", (chunk) => {
+//     console.log("CHUNK");
     
-  });
-  request.on("end", () => {
-    console.log("END");
-  });
+//   });
+//   request.on("end", () => {
+//     console.log("END");
+//   });
 
-  resolve.send(request.body);
-});
+//   resolve.send(request.body);
+// });
 
 app.listen(PORT, () => {
   console.log(`The server has been started on port ${PORT}...`);
