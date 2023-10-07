@@ -13,7 +13,7 @@ app.use(express.json());
 //   resolve.send("Success");
 // });
 
-app.use("/", userRouter);
+app.use("/server", userRouter);
 
 // app.post("/", (request, resolve) => {
 
