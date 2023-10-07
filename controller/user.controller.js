@@ -1,9 +1,9 @@
 // const db = require("../db");
-import { pool } from "../db";
+import { pool } from "../db.js";
 
 export class UserController {
   async createUser(req, res) {
-    const newPerson = await db.query(`INSERT INTO person (login, password) values ($1, $2) RETURNING *`, ["ttt", "ttt_pass"]);
+    const newPerson = await pool.query(`INSERT INTO person (login, password) values ($1, $2) RETURNING *`, ["ttt", "ttt_pass"]);
 
     res.json(newPerson);
   }
