@@ -5,10 +5,10 @@ const { createHmac } = await import("node:crypto");
 export class UserController {
   async createUser(req, res) {
     let isContains = await pool.query(
-      "SELECT EXISTS (SELECT 1 FROM person WHERE login = $1);",
+      `SELECT EXISTS (SELECT 1 FROM person WHERE login = $1) RETURNING *`,
       [req.body.login]
     );
-    if (isContains) res.json("aboba");
+    if (isContains) res.json(isContains);
     const session_key = createHmac("sha256", req.body.login)
       .update(req.body.password + req.body.email)
       .digest("hex");
