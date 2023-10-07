@@ -34,15 +34,15 @@ export class UserController {
 
     res.json({ session_key });
   }
-  async isAuthorized(req, res) {
+  async isAuthorized(req, res, next) {
     const isLoginContains = (await pool.query(`SELECT 1 FROM person WHERE login = $1`, [req.body.login])).rows.length > 0;
     const isSessionKeyContains = (await pool.query(`SELECT 1 FROM person WHERE session_key = $1`, [req.body.session_key])).rows.length > 0;
 
     if (!isLoginContains) res.json({ error: "login_notExist" });
     if (!isSessionKeyContains) res.json({ error: "sessionKey_notExist" });
 
-    res.status("OK")
     res.json(true);
+    next();
   }
   async getUsers(req, res) {
     // const users = await db.query(`SELECT * FROM person`)
