@@ -3,10 +3,10 @@ import userController from "../controller/user.controller";
 const router = new Router();
 
 router.post((req, res) => {
-  res.send(req.body);
+  res.json("Success!!!");
 });
 router.get("", (req, res) => {
-  res.send(req.body);
+  res.json("Success!!!");
 });
 
 module.exports = router;
