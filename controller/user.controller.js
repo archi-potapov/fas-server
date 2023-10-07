@@ -10,10 +10,8 @@ export class UserController {
     );
 
     if (isContains.rows[0].exists) {
-      res.json(isContains.rows[0].exists);
+      res.json({ error: "user exists" });
       return;
-    } else {
-      res.json(new Error(""));
     }
 
     const session_key = createHmac("sha256", req.body.login)
