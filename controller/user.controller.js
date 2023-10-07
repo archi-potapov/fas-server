@@ -1,8 +1,8 @@
-// const db = require("../db");
 import { pool } from "../db.js";
 const { createHmac } = await import("node:crypto");
 
 export class UserController {
+  //login, password, email
   async createUser(req, res) {
     let isLoginContains = await pool.query(
       `SELECT EXISTS (SELECT 1 FROM person WHERE login = $1);`,
@@ -35,6 +35,7 @@ export class UserController {
     res.json({ session_key });
   }
   async isAuthorized(req, res) {
+    //login, session_key
     const isLoginContains = (await pool.query(`SELECT 1 FROM person WHERE login = $1`, [req.body.login])).rows.length > 0;
     const isSessionKeyContains = (await pool.query(`SELECT 1 FROM person WHERE session_key = $1`, [req.body.session_key])).rows.length > 0;
 
@@ -43,12 +44,13 @@ export class UserController {
     else res.json(true);
   }
   async getSessionKey(req, res) {
-    const user = await pool.query(`SELECT * FROM person WHERE login = $1`, [req.body.login]);
-    // const isSessionKeyContains = (await pool.query(`SELECT 1 FROM person WHERE password = $1`, [req.body.session_key])).rows.length > 0;
+    //login, password
+    const data = await pool.query(`SELECT * FROM person WHERE login = $1`, [req.body.login]);
+    const user = data.rowCount ? data.rows[0] : null;
 
-    // if (!isLoginContains) res.json({ error: "login_notExist" });
-    // else if (!isSessionKeyContains) res.json({ error: "sessionKey_notExist" });
-    res.json(user);
+    if (user === null) res.json({ error: "login_notExist" });
+    else if (user.rows[0].password !== req.body.password) res.json({ error: "password_invalid" });
+    else res.json({ session_key: user.rows[0].session_key });
   }
   async getUsers(req, res) {
     // const users = await db.query(`SELECT * FROM person`)
