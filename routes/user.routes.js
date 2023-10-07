@@ -1,12 +1,8 @@
 import { Router } from "express";
-import userController from "../controller/user.controller";
-const router = new Router();
+import { UserController } from "../controller/user.controller.js";
+export const userRouter = new Router();
 
-router.post((req, res) => {
-  res.json("Success!!!");
-});
-router.get("", (req, res) => {
-  res.json("Success!!!");
-});
+let userController = new UserController()
 
-module.exports = router;
+userRouter.post("", userController.createUser);
+userRouter.get("",userController.getUsers);

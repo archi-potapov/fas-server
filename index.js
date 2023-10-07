@@ -1,6 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
-import { userRouter } from "./routes/user.routes";
+import { userRouter } from "./routes/user.routes.js";
 
 const PORT = 3001;
 const app = express();
@@ -8,12 +8,12 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.get("/", (request, resolve) => {
-  //   console.log(request.hostname);
-  resolve.send("Success");
-});
+// app.get("/", (request, resolve) => {
+//   //   console.log(request.hostname);
+//   resolve.send("Success");
+// });
 
-// app.use("/", userRouter);
+app.use("/", userRouter);
 
 // app.post("/", (request, resolve) => {
 

@@ -1,8 +1,8 @@
-const db = require("../db");
-class UserController {
+// const db = require("../db");
+export class UserController {
   async createUser(req, res) {
     //const newPerson = await db.query(`INSERT INTO person (name)`)
-    res.json("Created!!!");
+    res.json(req.body);
   }
   async getUsers(req, res) {
     // const users = await db.query(`SELECT * FROM person`)
@@ -13,5 +13,3 @@ class UserController {
   async updateUser(req, res) {}
   async deleteUser(req, res) {}
 }
-
-module.exports = new UserController();
