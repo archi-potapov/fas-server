@@ -1,14 +1,19 @@
 // const db = require("../db");
 import { pool } from "../db.js";
+const secret = "abcdefg";
 
 export class UserController {
   async createUser(req, res) {
+    const session_key = createHmac("sha256", req.body.login)
+      .update(req.body.password + req.body.email)
+      .digest("hex");
+
     const newPerson = await pool.query(
-      `INSERT INTO person (login, password, email, privilege_id) values ($1, $2, $3, $4) RETURNING *`,
-      [req.body.login, req.body.password, req.body.email, 0]
+      `INSERT INTO person (login, password, email, privilege_id, session_key) values ($1, $2, $3, $4, $5) RETURNING *`,
+      [req.body.login, req.body.password, req.body.email, 0, session_key]
     );
 
-    res.json(newPerson);
+    res.json({ session_key });
   }
   async getUsers(req, res) {
     // const users = await db.query(`SELECT * FROM person`)
