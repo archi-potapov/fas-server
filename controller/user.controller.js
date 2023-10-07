@@ -3,7 +3,10 @@ import { pool } from "../db.js";
 
 export class UserController {
   async createUser(req, res) {
-    const newPerson = await pool.query(`INSERT INTO person (login, password) values ($1, $2) RETURNING *`, ["ttt", "ttt_pass"]);
+    const newPerson = await pool.query(
+      `INSERT INTO person (login, password, email, privilege_id) values ($1, $2, $3, $4) RETURNING *`,
+      [req.body.login, req.body.password, req.body.email, 0]
+    );
 
     res.json(newPerson);
   }
