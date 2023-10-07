@@ -1,9 +1,13 @@
 // const db = require("../db");
 import { pool } from "../db.js";
-const { createHmac } = await import('node:crypto');
+const { createHmac } = await import("node:crypto");
 
 export class UserController {
   async createUser(req, res) {
+    let isContains = await pool.query("SELECT 1 FROM person WHERE login=$1", [
+      req.body.login,
+    ]);
+    if (isContains) res.json("aboba");
     const session_key = createHmac("sha256", req.body.login)
       .update(req.body.password + req.body.email)
       .digest("hex");
