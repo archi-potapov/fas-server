@@ -42,6 +42,14 @@ export class UserController {
     else if (!isSessionKeyContains) res.json({ error: "sessionKey_notExist" });
     else res.json(true);
   }
+  async getSessionKey(req, res) {
+    const user = await pool.query(`SELECT 1 FROM person WHERE login = $1`, [req.body.login]);
+    // const isSessionKeyContains = (await pool.query(`SELECT 1 FROM person WHERE password = $1`, [req.body.session_key])).rows.length > 0;
+
+    // if (!isLoginContains) res.json({ error: "login_notExist" });
+    // else if (!isSessionKeyContains) res.json({ error: "sessionKey_notExist" });
+    res.json(user);
+  }
   async getUsers(req, res) {
     // const users = await db.query(`SELECT * FROM person`)
     // res.json(users.rows);
