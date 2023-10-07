@@ -49,8 +49,8 @@ export class UserController {
     const user = data.rowCount ? data.rows[0] : null;
 
     if (user === null) res.json({ error: "login_notExist" });
-    else if (user.rows[0]?.password !== req.body.password) res.json({ error: "password_invalid" });
-    else res.json({ session_key: user.rows[0].session_key });
+    else if (user.password !== req.body.password) res.json({ error: "password_invalid" });
+    else res.json({ session_key: user.session_key });
   }
   async getUsers(req, res) {
     // const users = await db.query(`SELECT * FROM person`)
