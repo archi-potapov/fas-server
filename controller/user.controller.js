@@ -4,13 +4,22 @@ const { createHmac } = await import("node:crypto");
 
 export class UserController {
   async createUser(req, res) {
-    let isContains = await pool.query(
+    let isLoginContains = await pool.query(
       `SELECT EXISTS (SELECT 1 FROM person WHERE login = $1);`,
       [req.body.login]
     );
+    let isEmailContains = await pool.query(
+      `SELECT EXISTS (SELECT 1 FROM person WHERE email = $1);`,
+      [req.body.email]
+    );
 
-    if (isContains.rows[0].exists) {
-      res.json({ error: "user exists" });
+    if (isEmailContains.rows[0].exists) {
+      res.json({ error: "email_exists" });
+      return;
+    }
+
+    if (isLoginContains.rows[0].exists) {
+      res.json({ error: "login_exists" });
       return;
     }
 
@@ -24,6 +33,12 @@ export class UserController {
     );
 
     res.json({ session_key });
+  }
+  async isAuthorized(req, res) {
+    // req.
+    // const users = await db.query(`SELECT * FROM person`)
+    // res.json(users.rows);
+    res.json("Success!!!");
   }
   async getUsers(req, res) {
     // const users = await db.query(`SELECT * FROM person`)
