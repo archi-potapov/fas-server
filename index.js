@@ -13,7 +13,7 @@ app.get("/", (request, resolve) => {
   resolve.send("Success");
 });
 
-app.use("/", userRouter);
+// app.use("/", userRouter);
 
 // app.post("/", (request, resolve) => {
 
