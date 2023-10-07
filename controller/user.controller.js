@@ -36,7 +36,7 @@ export class UserController {
   }
   async isAuthorized(req, res) {
     // req.
-    const user = await db.query(`SELECT 1 FROM person WHERE email = $1`, [req.body.login]);
+    const user = await pool.query(`SELECT 1 FROM person WHERE email = $1`, [req.body.login]);
     // res.json(users.rows);
     res.json(user);
   }
