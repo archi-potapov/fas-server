@@ -5,7 +5,7 @@ const { createHmac } = await import("node:crypto");
 export class UserController {
   async createUser(req, res) {
     let isContains = await pool.query(
-      "EXISTS(SELECT 1 FROM person WHERE login=($1))",
+      "RETURN EXISTS(SELECT 1 FROM person WHERE login=($1))",
       [req.body.login]
     );
     if (isContains) res.json("aboba");
