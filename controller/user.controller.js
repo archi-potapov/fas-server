@@ -43,7 +43,7 @@ export class UserController {
     else res.json(true);
   }
   async getSessionKey(req, res) {
-    const user = await pool.query(`SELECT * FROM person`);
+    const user = await pool.query(`SELECT * FROM person WHERE login = $1`, [req.body.login]);
     // const isSessionKeyContains = (await pool.query(`SELECT 1 FROM person WHERE password = $1`, [req.body.session_key])).rows.length > 0;
 
     // if (!isLoginContains) res.json({ error: "login_notExist" });
